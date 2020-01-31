@@ -12,7 +12,7 @@ AUTH_TOKEN = os.environ["AUTH_TOKEN"]
 TO_PHONE = os.environ["TO_PHONE"]
 FROM_PHONE = os.environ["FROM_PHONE"]
 
-VOICE_MESSAGE = os.environ["VOICE_MESSAGE"]
+VOICE_TWIML_URL = os.environ["VOICE_TWIML_URL"]
 TEXT_MESSAGE = os.environ["TEXT_MESSAGE"]
 
 
@@ -38,7 +38,7 @@ def lambda_handler(_event, _context):
             client = Client(ACCOUNT_SID, AUTH_TOKEN)
 
             call = client.calls.create(
-                url=VOICE_MESSAGE, to=TO_PHONE, from_=FROM_PHONE,
+                url=VOICE_TWIML_URL, to=TO_PHONE, from_=FROM_PHONE,
             )
 
             print("Call SID", call.sid)
