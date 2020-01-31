@@ -12,6 +12,9 @@ AUTH_TOKEN = os.environ["AUTH_TOKEN"]
 TO_PHONE = os.environ["TO_PHONE"]
 FROM_PHONE = os.environ["FROM_PHONE"]
 
+VOICE_MESSAGE = os.environ["VOICE_MESSAGE"]
+TEXT_MESSAGE = os.environ["TEXT_MESSAGE"]
+
 
 def validate(res):
     return EXPECTED in res
@@ -35,12 +38,16 @@ def lambda_handler(_event, _context):
             client = Client(ACCOUNT_SID, AUTH_TOKEN)
 
             call = client.calls.create(
-                url="http://demo.twilio.com/docs/voice.xml",
-                to=TO_PHONE,
-                from_=FROM_PHONE,
+                url=VOICE_MESSAGE, to=TO_PHONE, from_=FROM_PHONE,
             )
 
             print("Call SID", call.sid)
+
+            message = client.messages.create(
+                body=TEXT_MESSAGE, from_=TO_PHONE, to=FROM_PHONE,
+            )
+
+            print("Message SID", message.sid)
     except OSError as err:
         print("OSError:", err)
     except:
