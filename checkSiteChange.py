@@ -38,13 +38,13 @@ def lambda_handler(_event, _context):
             client = Client(ACCOUNT_SID, AUTH_TOKEN)
 
             call = client.calls.create(
-                url=VOICE_TWIML_URL, to=TO_PHONE, from_=FROM_PHONE,
+                url=VOICE_TWIML_URL, from_=FROM_PHONE, to=TO_PHONE,
             )
 
             print("Call SID", call.sid)
 
             message = client.messages.create(
-                body=TEXT_MESSAGE, from_=TO_PHONE, to=FROM_PHONE,
+                body=TEXT_MESSAGE, from_=FROM_PHONE, to=TO_PHONE,
             )
 
             print("Message SID", message.sid)
